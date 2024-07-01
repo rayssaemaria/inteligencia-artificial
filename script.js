@@ -8,7 +8,12 @@ const perguntas = [
 {
 enunciado: "Voce acredita que a inteligência artificial pode tornar tarefas do dia a dia mais fáceis e eficientes?",
 alternativas: [
-"Sim",
+    {
+        texto: "Sim",
+        afirmação: Voce concordou que a IA pode te ajudar no dia a dia
+        texto:
+    }
+
 "Nao"
 ]
 },
