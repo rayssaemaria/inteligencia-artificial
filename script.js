@@ -5,44 +5,84 @@ const caixaResultado = document.querySelector(".caixa-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
 
 const perguntas = [
-{
-enunciado: "Voce acredita que a inteligência artificial pode tornar tarefas do dia a dia mais fáceis e eficientes?",
-alternativas: [
     {
-        texto: "Sim",
-        afirmação: Voce concordou que a IA pode te ajudar no dia a dia
-        texto:
-    }
+        enunciado: "Voce acredita que a inteligência artificial pode tornar tarefas do dia a dia mais fáceis e eficientes?",
+        alternativas: [
+            {
+                texto: "Sim",
+                afirmacao: "Voce concordou que a IA pode te ajudar no dia a dia "
+            },
+            {
+                texto: "não",
+                afirmacao: " voce não concordou que a IA pode tornar o dia mais fáceis "
+            }
+        ]
+    },
+    {
+        enunciado: "A inteligência artificial pode acabar com os empregos? ",
+        alternativas: [
+            {
+                texto: " sim",
+                afirmacao: ""
+            },
+            {
+                texto: " não",
+                afirmacao: "     "
+            }
+        ]
+    },
+    {
+        enunciado: "Você se preocupa com questões ética relaciondas ao uso da inteligência artificial em diferentes aspectos da vida cotidiana?",
+        alternativas: [
+            {
+                texto: "sim",
+                afirmacao: "    "
+            },
+            {
+                texto: "não",
+                afirmacao: "      "
+            }
 
-"Nao"
-]
-},
-{
-enunciado: "A inteligência artificial pode acabar com os empregos?",
-alternativas: [
-"Sim",
-"Nao"
-]
-},
-{
-enunciado: "Você se preocupa com questões ética relaciondas ao uso da inteligência artificial em diferentes aspectos da vida cotidiana?",
-alternativas: [
-"Sim",
-"Nao"
-]
-},
-{
-enunciado: "Pergunta 4",
-alternativas: [
-"Alternativa 1",
-"Alternativa 2"
-]
-},
-{
-enunciado: "Pergunta 5",
-alternativas: [
-"Alternativa 1",
-"Alternativa 2"
-]
-}
+        ]
+    },
 ];
+
+
+let atual = 0;
+let perguntaAtual;
+let historiaFinal = "";
+
+function mostraPergunta() {
+    if (atual >= perguntas.length) {
+        mostraResultado();
+        return;
+    }
+    perguntaAtual = perguntas[atual];
+    caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = "";
+    mostraAlternativas();
+}
+
+function mostraAlternativas(){
+    for(const alternativa of perguntaAtual.alternativas) {
+        const botaoAlternativas = document.createElement("button");
+        botaoAlternativas.textContent = alternativa.texto;
+        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
+        caixaAlternativas.appendChild(botaoAlternativas);
+    }
+}
+
+function respostaSelecionada(opcaoSelecionada) {
+    const afirmacoes = opcaoSelecionada.afirmacao;
+    historiaFinal += afirmacoes + " ";
+    atual++;
+    mostraPergunta();
+}
+
+function mostraResultado() {
+    caixaPerguntas.textContent = "Em 2049...";
+    textoResultado.textContent = historiaFinal;
+    caixaAlternativas.textContent = "";
+}
+
+mostraPergunta();
